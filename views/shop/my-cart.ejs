@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    
+    <main>
+        <% if (products.length > 0) { %>
+            <ul class="cart__item-list">
+                <% products.forEach(p => { %>
+                    <li class="cart__item">
+                        <h1><%= p.productId.title%></h1>
+                        <h2><%= p.quantity %>個</h2>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <input type="hidden" name="productId" value="<%= p.productId._id %>">
+                        <button class="btn danger" type="button" onclick="deleteCartItem(this)">刪除</button>
+                    </li>
+                <% }) %>
+            </ul>
+            <hr>
+            <div class="center">
+                <form action="/create-order" method="POST">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button class="btn" type="submit">結帳</button>
+                </form>
+            </div>
+            
+        <% }else{ %>
+            <h1>購物車內尚無商品</h1>
+        <% } %>
+    </main>
+
+<%- include('../includes/end.ejs') %>
+
+<script src="/js/shop.js"></script>
