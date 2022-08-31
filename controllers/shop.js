@@ -170,12 +170,10 @@ exports.getInvoice = (req, res, next) => {
             return next(new Error('無權限'))
         }
         const invoiceName = '付款通知-' + orderId + '.pdf';
-        const invoicePath = path.join('data', 'invoices', invoiceName)
         const pdfDoc = new PDFfile();
 
         res.setHeader('Content-Type', 'application/pdf');
 
-        pdfDoc.pipe(fs.createWriteStream(invoicePath));
         pdfDoc.pipe(res);
 
         pdfDoc.font('NotoSansTC-Regular.otf')
