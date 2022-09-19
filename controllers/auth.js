@@ -8,21 +8,21 @@ const User = require("../models/user");
 
 const errorHandler500 = require("../util/errorHandler");
 
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   auth: {
-//     user: "nodeproject4978@gmail.com",
-//     pass: "qhpbkughincsfdhv",
-//   },
-// });
 const transporter = nodemailer.createTransport({
-  host: "smtp.mailtrap.io",
-  port: 2525,
+  service: "gmail",
   auth: {
-    user: "88180487f43cf1",
-    pass: "41016e9b0a7754",
+    user: "nodeproject4978@gmail.com",
+    pass: "qhpbkughincsfdhv",
   },
 });
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.mailtrap.io",
+//   port: 2525,
+//   auth: {
+//     user: "88180487f43cf1",
+//     pass: "41016e9b0a7754",
+//   },
+// });
 
 //登入頁面
 exports.getLogin = (req, res, next) => {
