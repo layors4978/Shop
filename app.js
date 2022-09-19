@@ -62,9 +62,10 @@ app.use(helmet.contentSecurityPolicy({
     })
 )
 app.use(compression())
-app.use(morgan('combine', {stream: accessLogStream}));
+app.use(morgan('combined', {stream: accessLogStream}));
 
 app.use(express.urlencoded({ extended: true }));//用來parse req.body
+app.use(express.json());
 app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));//讓public裡的檔案可以作用
 app.use('/images', express.static(path.join(__dirname, 'images')));

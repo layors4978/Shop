@@ -127,7 +127,7 @@ exports.getEditProduct = (req, res, next) => {
     .catch((err) => errorHandler500(next, err));
 };
 
-exports.postEditProduct = (req, res, next) => {
+exports.postEditProduct = async (req, res, next) => {
     const productId = req.body.productId;
     const updatedTitle = req.body.title;
     const updatedPrice = req.body.price;
@@ -151,9 +151,8 @@ exports.postEditProduct = (req, res, next) => {
         });
     };
 
-    Product
-    .findById(productId)
-    .then((product) => {
+    try{
+        product = await Product.findById(productId)
         if(product.userId.toString() !== req.user._id.toString()){
             return res.redirect('/');
         }
@@ -166,38 +165,32 @@ exports.postEditProduct = (req, res, next) => {
             product.imgUrl = image.path;
         };
         
-        return product.save()
-        .then((result) => {
-            console.log('updated');
-            res.redirect('/admin/products');
-        })
-    })
-    .catch((err) => errorHandler500(next, err));
+        await product.save()
+        console.log('updated');
+        return res.redirect('/admin/products');
+    }
+    catch(err){
+        errorHandler500(next, err);
+    }
 }
 
-exports.deleteProduct = (req, res, next) => {
+exports.deleteProduct = async (req, res, next) => {
     const productId = req.params.productId;
-    let imgUrl;
-
-    Product.findById(productId)
-    .then((product) => {
+    try{
+        product = await Product.findById(productId);
         if(!product){
             return next(new Error('找無該商品'))
-        }
-        imgUrl = product.imgUrl;
-        return Product.deleteOne({_id: productId, userId: req.user._id})
-    })
-    .then((result) => {
+        };
+        const imgUrl = product.imgUrl;
+        result = await Product.deleteOne({_id: productId, userId: req.user._id})
         if(result.deletedCount > 0){
             fileHelper.deleteFile(imgUrl)
             console.log('cart product deleted');
-            return User.updateMany({}, {$pull: {'cart.items': {productId: productId} } } );
-        }
-    })
-    .then((result) => {
+            User.updateMany({}, {$pull: {'cart.items': {productId: productId} } } );
+        };
         res.status(200).json({message: '刪除成功'});
-    })
-    .catch((err) => {
-        res.status(500).json({message: '刪除失敗'})
-    });
+    }
+    catch(err){
+        res.status(500).json({message: '刪除失敗'});
+    };
 }
