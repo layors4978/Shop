@@ -1,7 +1,11 @@
 <section class="pagination">
-    <a href="/">第一頁</a>
-    <% for(let i = 1; i <= paginationData.lastPage; i++) { %>
-    <a class="<%= paginationData.currentPage === i ? 'active' : '' %>" href="?page=<%= i %>"><%= i %></a>
-    <% } %>
-    <a href="?page=<%= paginationData.lastPage %>">最後一頁</a>
+  <a href="/">第一頁</a>
+  <% for(let i = 1; i <= paginationData.lastPage; i++) { %>
+  <a
+    class="<%= paginationData.currentPage === i ? 'active' : '' %>"
+    href="?page=<%= i %>"
+    ><%= i %></a
+  >
+  <% } %>
+  <a href="?page=<%= paginationData.lastPage %>">最後一頁</a>
 </section>

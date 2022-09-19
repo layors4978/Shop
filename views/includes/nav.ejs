@@ -1,44 +1,62 @@
 <div class="backdrop"></div>
 <header class="main-header">
-    <nav class="main-header__nav">
-        <ul class="main-header__item-list">
-            <li class="main-header__item">
-                <a class="<%= path === '/' ? 'active' : ''%>" href="/">商店</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/products' ? 'active' : ''%>" href="/products">商品</a>
-            </li>
-            <% if (isAuthenticated) { %>
-            <li class="main-header__item">
-                <a class="<%= path === '/my-cart' ? 'active' : ''%>" href="/my-cart">購物車</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/orders' ? 'active' : ''%>" href="/orders">購買紀錄</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin/add-product' ? 'active' : ''%>" href="/admin/add-product">增加商品</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/admin/products' ? 'active' : ''%>" href="/admin/products">管理商品列表</a>
-            </li>
-            <% } %>
-        </ul>
-        <ul class="main-header__item-list">
-            <% if (!isAuthenticated) { %>
-            <li class="main-header__item">
-                <a class="<%= path === '/login' ? 'active' : ''%>" href="/login">登入</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/signup' ? 'active' : ''%>" href="/signup">註冊</a>
-            </li>
-            <% }else{ %>
-            <li class="main-header__item">
-                <form action="/logout" method="POST">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit">登出</button>
-                </form>
-            </li>
-            <% } %>
-        </ul>
-    </nav>
+  <nav class="main-header__nav">
+    <ul class="main-header__item-list">
+      <li class="main-header__item">
+        <a class="<%= path === '/' ? 'active' : ''%>" href="/">商店</a>
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/products' ? 'active' : ''%>" href="/products"
+          >商品</a
+        >
+      </li>
+      <% if (isAuthenticated) { %>
+      <li class="main-header__item">
+        <a class="<%= path === '/my-cart' ? 'active' : ''%>" href="/my-cart"
+          >購物車</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/orders' ? 'active' : ''%>" href="/orders"
+          >購買紀錄</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/admin/add-product' ? 'active' : ''%>"
+          href="/admin/add-product"
+          >增加商品</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/admin/products' ? 'active' : ''%>"
+          href="/admin/products"
+          >管理商品列表</a
+        >
+      </li>
+      <% } %>
+    </ul>
+    <ul class="main-header__item-list">
+      <% if (!isAuthenticated) { %>
+      <li class="main-header__item">
+        <a class="<%= path === '/login' ? 'active' : ''%>" href="/login"
+          >登入</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/signup' ? 'active' : ''%>" href="/signup"
+          >註冊</a
+        >
+      </li>
+      <% }else{ %>
+      <li class="main-header__item">
+        <form action="/logout" method="POST">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button type="submit">登出</button>
+        </form>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
 </header>

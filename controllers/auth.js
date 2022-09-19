@@ -6,8 +6,6 @@ const { validationResult } = require("express-validator");
 
 const User = require("../models/user");
 
-const errorHandler500 = require("../util/errorHandler");
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
