@@ -1,7 +1,9 @@
 {
-    "env": {
-        "mongoDB_user": "layors4978",
-        "mongoDB_password": "ga419GsoVts8LhRz",
-        "mongoDB_database": "shop2"
-    }
+  "env": {
+    "mongoDB_user": "layors4978",
+    "mongoDB_password": "ga419GsoVts8LhRz",
+    "mongoDB_database": "shop2",
+    "mailsender": "nodeproject4978@gmail.com",
+    "mailpass": "qhpbkughincsfdhv"
+  }
 }

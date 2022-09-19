@@ -9,18 +9,10 @@ const User = require("../models/user");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "nodeproject4978@gmail.com",
-    pass: "qhpbkughincsfdhv",
+    user: process.env.mailsender,
+    pass: process.env.mailpass,
   },
 });
-// const transporter = nodemailer.createTransport({
-//   host: "smtp.mailtrap.io",
-//   port: 2525,
-//   auth: {
-//     user: "88180487f43cf1",
-//     pass: "41016e9b0a7754",
-//   },
-// });
 
 //登入頁面
 exports.getLogin = (req, res, next) => {
@@ -159,7 +151,7 @@ exports.postSignup = async (req, res, next) => {
     res.redirect("/login");
     //信件內容
     const mailOptions = {
-      from: "nodeProject4978@gmail.com",
+      from: process.env.mailsender,
       to: email,
       subject: "已成功註冊！",
       html: "<h1>您已成功註冊！</h1>",
@@ -210,7 +202,7 @@ exports.postResetPassword = (req, res, next) => {
       res.redirect("/");
       //信件內容
       const mailOptions = {
-        from: "nodeProject4978@gmail.com",
+        from: process.env.mailsender,
         to: req.body.email,
         subject: "重設您的密碼",
         html: `
